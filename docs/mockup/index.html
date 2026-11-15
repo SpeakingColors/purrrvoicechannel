@@ -247,6 +247,7 @@ body { user-select:none; -webkit-user-select:none; } textarea, input, select { u
 .tline { font-size:13px; } .tline b { color:var(--ink); letter-spacing:.06em; } .tline small { font-size:10px; color:var(--ink-dim); letter-spacing:.04em; margin-left:4px; }
 .lufs { display:flex; gap:8px; align-items:baseline; font-family:var(--f-num); font-size:11px; color:var(--ink-dim); cursor:pointer; border:1px solid var(--line); border-radius:3px; padding:3px 7px; background:var(--disp); } .lufs b { color:var(--ink); font-weight:500; } .lufs i { font-style:normal; font-size:9px; opacity:.7; }
 </style>
+<style>.rig.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;border-radius:0;border-width:1px 0 0;padding:8px 14px;justify-content:center;flex-wrap:wrap}.rig.dock .lab{display:block;max-width:none;font-size:11px}.rig.dock .note{display:block;margin-left:0}body{padding-bottom:64px}</style>
 <div id="desk"><div id="frame"><div id="win">
 <div class="unit" id="unit">
   <div class="cheek l"></div>
@@ -427,6 +428,7 @@ function fit(cv) {
 /* ---------- plugin window: fixed shape, resizable from all 4 corners and all 4 sides ---------- */
 var BASE_W = KIT.W, BASE_H = KIT.H, ASPECT = BASE_W / BASE_H, MIN_S = 0.25, MAX_S = 2.5, winScale = 1, winX = 8, winY = 4;
 var desk = $("#desk"), frameEl = $("#frame"), winEl = $("#win");
+(function () { var rg0 = $(".rig"); if (rg0) { rg0.classList.add("dock"); document.body.appendChild(rg0); } })();
 function deskW() { return desk.clientWidth || document.documentElement.clientWidth || 1000; }
 function maxScaleNow() { return clamp((deskW() - 16) / BASE_W, MIN_S, MAX_S); }
 function layoutWin() {
@@ -682,7 +684,7 @@ function VoiceDSP(sr) {
     au7a: { k: "au7", B: 250, RL: 10000, Vg: -6.5, ag: 1, ls: 3, hs: -4, fc: 11000, sag: 0.2, gt: -1.2, nz: 3 },
     at7: { k: "at7", B: 250, RL: 22000, Vg: -2.5, ag: 0, ls: 1, hs: 2, fc: 21000, sag: 0.05, gt: 0.3, nz: 4 },
     at7a: { k: "at7", B: 250, RL: 22000, Vg: -1.7, ag: 1, ls: 3.5, hs: -5, fc: 9500, sag: 0.3, gt: -0.8, nz: 3 },
-    ax7: { k: "ax7", B: 250, RL: 100000, Vg: -1.8, ag: 0, ls: -1, hs: 1, fc: 20000, sag: 0.1, gt: 0, nz: 5 },
+    ax7: { k: "ax7", B: 250, RL: 100000, Vg: -1.8, ag: 0, ls: 2.5, hs: 3, fc: 16000, sag: 0.25, gt: 0.5, nz: 5 },
     mw: { k: "ax7", B: 300, RL: 100000, Vg: -1.3, ag: 0, ls: 4, hs: -4, fc: 11000, sag: 0.4, gt: 1.5, nz: 5 },
     tsol: { k: "ax7", B: 250, RL: 150000, Vg: -1.5, ag: 0, ls: 3, hs: 5, fc: 22000, sag: 0.1, gt: 1, nz: 4 },
     jj: { k: "ax7", B: 250, RL: 100000, Vg: -2.2, ag: 0, ls: 3.5, hs: -5.5, fc: 12000, sag: 0.25, gt: 0, nz: 4 },
