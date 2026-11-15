@@ -1,0 +1,1390 @@
+{
+ "controls": [
+  {
+   "label": "Gain",
+   "tip": "Preamp gain, 0 to +60 dB. The hardware prints 20 to 60 dB on this knob (0 to 40 with the pad in); the plugin starts at 0 because a DAW track is not a microphone. Raise it to push the tube harder. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw big tkg",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    86.6036376953125,
+    533.4581909179688,
+    146.72727966308594,
+    116.40362548828125
+   ],
+   "def": "+0.0 dB",
+   "min": "+0.0 dB",
+   "max": "+60.0 dB",
+   "panel": "sPre",
+   "n": 1
+  },
+  {
+   "label": "Tube",
+   "tip": "Tube rolling: ten cat tubes on three real tube types (12AU7, 12AT7, 12AX7, new and aged), each with its type shown. The tube stage is a Koren triode model with the published parameters of its type; the differences between the 12AX7 cats and the ageing are our voicing on top, scaled by Variation. The tube in the ART unit is not stated in its manual, so the default is a typical choice, unverified.",
+   "kind": "switch",
+   "cls": "",
+   "section": "sPre",
+   "id": "tubeSel",
+   "r": [
+    239.20001220703125,
+    554.9782104492188,
+    140.85818481445312,
+    20.54180908203125
+   ],
+   "panel": "sPre",
+   "n": 2
+  },
+  {
+   "label": "Pad -20",
+   "tip": "Lowers the preamp gain by 20 dB for hot signals.",
+   "kind": "button",
+   "cls": "ledb",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    420.16363525390625,
+    542.2618408203125,
+    43.040008544921875,
+    37.70587158203125
+   ],
+   "panel": "sPre",
+   "n": 3
+  },
+  {
+   "label": "Invert",
+   "tip": "Flips the phase 180 degrees at the preamp output.",
+   "kind": "button",
+   "cls": "ledb",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    420.16363525390625,
+    591.7058715820312,
+    43.040008544921875,
+    37.70587158203125
+   ],
+   "panel": "sPre",
+   "n": 4
+  },
+  {
+   "label": "Low cut",
+   "tip": "100 Hz high-pass filter, 6 dB per octave: removes rumble, pops and wind noise and still sounds natural.",
+   "kind": "button",
+   "cls": "ledb",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    419.04791259765625,
+    641.14990234375,
+    45.271484375,
+    37.70587158203125
+   ],
+   "panel": "sPre",
+   "n": 5
+  },
+  {
+   "label": "Impedance",
+   "tip": "On the hardware this loads your microphone (150 Ohm to 3.4 kOhm). In the plugin there is no mic, so this is a tone control of our own modelling, not mic loading: about -3 dB (150 Ohm) to +3 dB (3.4 kOhm) smooth tilt of the top, with a gentle opposite body change around 220 Hz. The dotted line in the EQ view shows it; the readout shows the top change. The real physical effect (source resistance with the tube input capacitance, which we computed) is far above the audible range, so it is not what you hear here. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw tki",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    105.18909454345703,
+    653.7745361328125,
+    109.55635833740234,
+    96.84002685546875
+   ],
+   "def": "1.2k +0.0dB",
+   "min": "150 -3.0dB",
+   "max": "3.4k +3.0dB",
+   "panel": "sPre",
+   "n": 6
+  },
+  {
+   "label": "Tube voltage",
+   "tip": "NORMAL adds warmth with more tube saturation at higher levels. HIGH gives more gain, headroom and bandwidth. The change is gradual, 10 to 20 seconds, like the hardware.",
+   "kind": "switch",
+   "cls": "sw",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    254.83563232421875,
+    671.5958251953125,
+    109.58694458007812,
+    36.7276611328125
+   ],
+   "panel": "sPre",
+   "n": 7
+  },
+  {
+   "label": "Voicing",
+   "tip": "Plugin extra, not on the hardware. Strength of the selected tube's own voicing: tone, bandwidth, supply sag and gain trim. 100 % = the tube's base voicing, 0 % = neutral, 200 % = double, 300 % = extreme (very dark or bright, heavy sag). Works for every tube. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    102.75891876220703,
+    791.6981811523438,
+    60.64727020263672,
+    62.6036376953125
+   ],
+   "def": "100 %",
+   "min": "0 %",
+   "max": "300 %",
+   "panel": "sPre",
+   "n": 8
+  },
+  {
+   "label": "Colour",
+   "tip": "Plugin extra, not on the hardware. Tube colour, from angelic to nasty, at any level (you hear it even at low Gain). 0 = clean tube only. Up to about 50 % it adds warm even harmonics; above that it adds more and more grit, and 100 % is heavy, fuzzy and aggressive. Voicing and Gain still shape the tube itself. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    179.5614776611328,
+    791.6981811523438,
+    60.64727783203125,
+    62.6036376953125
+   ],
+   "def": "0 %",
+   "min": "0 %",
+   "max": "100 %",
+   "panel": "sPre",
+   "n": 9
+  },
+  {
+   "label": "Variation",
+   "tip": "Plugin extra, not on the hardware. How different the tubes sound from each other. This is an exaggeration factor on the voicing differences (tone, gain, bandwidth, supply sag, noise), 0 % = the tubes sound almost alike, 30 % = a clear difference, 100 % = five times the voicing difference (extreme). It is not a measured value. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    256.3640441894531,
+    791.6981811523438,
+    60.64727783203125,
+    62.6036376953125
+   ],
+   "def": "50 %",
+   "min": "0 %",
+   "max": "100 %",
+   "panel": "sPre",
+   "n": 10
+  },
+  {
+   "label": "Vintagenoise",
+   "tip": "Adds the tube's own noise floor, quiet or noisy depending on the tube (from retailer noise ratings, mapped by us to a level, so a rough guide only). Off by default.",
+   "kind": "button",
+   "cls": "ledb mini",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    333.181884765625,
+    804.643798828125,
+    30.72100830078125,
+    36.71240234375
+   ],
+   "panel": "sPre",
+   "n": 11
+  },
+  {
+   "label": "Threshold",
+   "tip": "Level above which the compressor works. The unit prints -40 to +20 dB here; we read that as dBu and show dBFS (0 VU = +4 dBu = -20 dBFS), so -64 to -4 dBFS. Also draggable on the Dynamics view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    516.0254516601562,
+    585.3018188476562,
+    109.556396484375,
+    119.33819580078125
+   ],
+   "def": "-20.0 dB",
+   "min": "-64.0 dB",
+   "max": "-4.0 dB",
+   "panel": "sDyn",
+   "n": 12
+  },
+  {
+   "label": "Ratio",
+   "tip": "How much the signal above the threshold is reduced. Fully left is off (1:1). A good start for vocals is 2.5:1. 20:1 makes it a limiter. Also draggable on the Dynamics view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    639.2763671875,
+    585.3018188476562,
+    109.556396484375,
+    119.33819580078125
+   ],
+   "def": "OFF",
+   "min": "OFF",
+   "max": "20:1 limit",
+   "panel": "sDyn",
+   "n": 13
+  },
+  {
+   "label": "De-ess amt",
+   "tip": "How hard the esses are pushed down: the value is the deepest reduction, OFF to -20 dB as printed on the unit. The threshold is automatic and follows the programme (it tracks the average level of the detected band), so more Amount is simply more de-essing; no threshold to set. Split band: only the band around De-ess Hz is reduced. The hardware prints OFF, -6, -14, -20 dB on this knob. The threshold. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    762.5272827148438,
+    585.3018188476562,
+    109.556396484375,
+    119.33819580078125
+   ],
+   "def": "OFF",
+   "min": "OFF",
+   "max": "-20.0 dB",
+   "panel": "sDyn",
+   "n": 14
+  },
+  {
+   "label": "Expander /gate.",
+   "tip": "Expand: a gentle downward expander at the hardware slope, 1:1.5. Gate: fast open, auto hold, release, with an on/off decision and a built-in 4 dB hysteresis, down to the Range floor. The threshold knob below switches it on; fully left (OFF) it is out of the path.",
+   "kind": "switch",
+   "cls": "sw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    902.3920288085938,
+    617.7958374023438,
+    117.3970947265625,
+    36.7276611328125
+   ],
+   "panel": "sDyn",
+   "n": 15
+  },
+  {
+   "label": "Attack",
+   "tip": "How fast the compressor reacts. The hardware goes from 0.25 ms (dot) to 100 ms; the plugin goes down to 0.05 ms as an extra. Short can sound thin or pumping; longer lets the punch of a snare through. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    516.0254516601562,
+    704.6400146484375,
+    109.556396484375,
+    131.07635498046875
+   ],
+   "def": "10 ms",
+   "min": "0.05 ms",
+   "max": "100 ms",
+   "panel": "sDyn",
+   "n": 16
+  },
+  {
+   "label": "Release",
+   "tip": "How fast the gain comes back. Log scale, so the fast region 0.1 to 100 ms has most of the travel. The hardware range is 100 ms to 3 s (the 3 s end is the unit's real limit): the dot marks 100 ms, and the Hardware range switch restores 100 ms to 3 s. Below 100 ms is a plugin extra; very fast release adds only the distortion any fast release causes (tested). Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    639.2763671875,
+    704.6400146484375,
+    109.556396484375,
+    131.07635498046875
+   ],
+   "def": "400 ms",
+   "min": "0.1 ms",
+   "max": "1.00 s",
+   "panel": "sDyn",
+   "n": 17
+  },
+  {
+   "label": "De-ess Hz",
+   "tip": "Centre of the detector band-pass and of the band that is reduced, 2 kHz to 15 kHz (as printed on the unit). About 6 kHz suits most voices. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    762.5272827148438,
+    704.6400146484375,
+    109.556396484375,
+    131.07635498046875
+   ],
+   "def": "6.00 kHz",
+   "min": "2.00 kHz",
+   "max": "15.0 kHz",
+   "panel": "sDyn",
+   "n": 18
+  },
+  {
+   "label": "Exp./gate thresh.",
+   "tip": "The expander or gate works below this level (dBFS, after the input trim). Fully left is OFF: the expander or gate is out of the signal path, as on the unit. The hardware prints OFF, -22 to +20 dB; read as dBu that is -46 to -4 dBFS. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw gth",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    906.3200073242188,
+    704.6400146484375,
+    109.556396484375,
+    131.07635498046875
+   ],
+   "def": "OFF",
+   "min": "OFF",
+   "max": "-10.0 dB",
+   "panel": "sDyn",
+   "n": 19
+  },
+  {
+   "label": "Auto",
+   "tip": "Program dependent release (plugin extra): fast for short peaks, slow for sustained sound. The Release knob sets the base time.",
+   "kind": "button",
+   "cls": "ledb mini",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    657.8923950195312,
+    807.7617797851562,
+    27.38909912109375,
+    27.95458984375
+   ],
+   "panel": "sDyn",
+   "n": 20
+  },
+  {
+   "label": "HW range",
+   "tip": "Plugin extra. Restores the hardware release range, 100 ms to 3 s. Off = the plugin range 0.1 ms to 1 s.",
+   "kind": "button",
+   "cls": "ledb mini",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    693.10693359375,
+    807.7617797851562,
+    37.10980224609375,
+    27.95458984375
+   ],
+   "panel": "sDyn",
+   "n": 21
+  },
+  {
+   "label": "Input trim",
+   "tip": "Plugin extra, not on the hardware (the manual has no input control for the dynamics). Level into the expander, gate and compressor, so you can drive the compressor harder or softer without touching the tube. Minus 18 to plus 18 dB. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    516.0254516601562,
+    836.694580078125,
+    60.64727783203125,
+    62.6036376953125
+   ],
+   "def": "0.0 dB",
+   "min": "-18.0 dB",
+   "max": "+18.0 dB",
+   "panel": "sDyn",
+   "n": 22
+  },
+  {
+   "label": "Makeup",
+   "tip": "Plugin extra, not on the hardware (the manual has no compressor output control). Gain after the compressor. With Auto makeup on, the plugin adds the static gain that the current threshold, ratio and knee remove at 6 dB over the threshold, on top of this knob. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    580.58544921875,
+    836.694580078125,
+    60.64727783203125,
+    62.6036376953125
+   ],
+   "def": "+0.0 dB",
+   "min": "+0.0 dB",
+   "max": "+24.0 dB",
+   "panel": "sDyn",
+   "n": 23
+  },
+  {
+   "label": "Automakeup",
+   "tip": "Adds makeup gain automatically from the threshold and ratio (plugin extra).",
+   "kind": "button",
+   "cls": "ledb mini",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    645.1454467773438,
+    849.6401977539062,
+    29.4677734375,
+    36.71240234375
+   ],
+   "panel": "sDyn",
+   "n": 24
+  },
+  {
+   "label": "Mix",
+   "tip": "Parallel compression: blends the compressed signal with the uncompressed one. 100 % = fully compressed. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    678.5259399414062,
+    836.694580078125,
+    60.64727783203125,
+    62.6036376953125
+   ],
+   "def": "100 %",
+   "min": "0 %",
+   "max": "100 %",
+   "panel": "sDyn",
+   "n": 25
+  },
+  {
+   "label": "TPlimiter",
+   "tip": "A lookahead true-peak safety limiter at the very end, ceiling -1 dBFS, 1.5 ms lookahead. On by default. Adds about 1.5 ms latency, which the plugin reports to the DAW.",
+   "kind": "button",
+   "cls": "ledb mini",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    743.0859375,
+    847.683837890625,
+    29.10089111328125,
+    36.71240234375
+   ],
+   "panel": "sDyn",
+   "n": 26
+  },
+  {
+   "label": "Range",
+   "tip": "Plugin extra. The most the gain is reduced: how deep the gate closes (the floor), 0 to -80 dB. Also limits the expander. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    895.5599975585938,
+    837.6727294921875,
+    60.64727783203125,
+    62.6036376953125
+   ],
+   "def": "-60 dB",
+   "min": "-0 dB",
+   "max": "-80 dB",
+   "panel": "sDyn",
+   "n": 27
+  },
+  {
+   "label": "Release",
+   "tip": "Plugin extra. How fast the gain closes, 0.1 ms to 2 s. Very fast is a hard chop (an effect). Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    965.9891357421875,
+    837.6727294921875,
+    60.6473388671875,
+    62.6036376953125
+   ],
+   "def": "40 ms",
+   "min": "0.1 ms",
+   "max": "2.00 s",
+   "panel": "sDyn",
+   "n": 28
+  },
+  {
+   "label": "EQ position",
+   "tip": "Puts the EQ before (pre comp) or after (post comp) the expander and compressor. Pre helps when the signal has too much low or high content for the compressor; Post shapes the finished sound.",
+   "kind": "switch",
+   "cls": "sw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1093.534912109375,
+    535.6285400390625,
+    162.5921630859375,
+    36.7276611328125
+   ],
+   "panel": "sEq",
+   "n": 29
+  },
+  {
+   "label": "EQ bypass",
+   "tip": "Sets the EQ flat without losing its settings.",
+   "kind": "switch",
+   "cls": "sw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1335.6348876953125,
+    535.6285400390625,
+    130.3121337890625,
+    36.7276611328125
+   ],
+   "panel": "sEq",
+   "n": 30
+  },
+  {
+   "label": "Mid-1 Hz",
+   "tip": "Bell, tunable from 100 Hz to 3 kHz. Also draggable on the EQ view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1208.4254150390625,
+    581.3890991210938,
+    45.7911376953125,
+    123.25091552734375
+   ],
+   "def": "400 Hz",
+   "min": "100 Hz",
+   "max": "3.00 kHz",
+   "panel": "sEq",
+   "n": 31
+  },
+  {
+   "label": "Mid-2 Hz",
+   "tip": "Bell, tunable from 500 Hz to 15 kHz. Also draggable on the EQ view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1313.778564453125,
+    581.3890991210938,
+    61.044677734375,
+    123.25091552734375
+   ],
+   "def": "3.50 kHz",
+   "min": "500 Hz",
+   "max": "15.0 kHz",
+   "panel": "sEq",
+   "n": 32
+  },
+  {
+   "label": "Low frequency",
+   "tip": "Low shelf, 50 or 150 Hz turnover.",
+   "kind": "switch",
+   "cls": "sw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1062.875,
+    624.64306640625,
+    110.931884765625,
+    36.7276611328125
+   ],
+   "panel": "sEq",
+   "n": 33
+  },
+  {
+   "label": "High frequency",
+   "tip": "High shelf, 5 or 15 kHz turnover.",
+   "kind": "switch",
+   "cls": "sw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1401.81494140625,
+    624.64306640625,
+    110.9320068359375,
+    36.7276611328125
+   ],
+   "panel": "sEq",
+   "n": 34
+  },
+  {
+   "label": "Low",
+   "tip": "Low shelf gain. Plus or minus 15 dB. Also draggable on the EQ view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1095.4453125,
+    704.6400146484375,
+    45.7911376953125,
+    123.25091552734375
+   ],
+   "def": "0.0 dB",
+   "min": "-15.0 dB",
+   "max": "+15.0 dB",
+   "panel": "sEq",
+   "n": 35
+  },
+  {
+   "label": "Mid-1",
+   "tip": "Mid-1 bell gain. Plus or minus 15 dB. Also draggable on the EQ view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1208.4254150390625,
+    704.6400146484375,
+    45.7911376953125,
+    123.25091552734375
+   ],
+   "def": "0.0 dB",
+   "min": "-15.0 dB",
+   "max": "+15.0 dB",
+   "panel": "sEq",
+   "n": 36
+  },
+  {
+   "label": "Mid-2",
+   "tip": "Mid-2 bell gain. Plus or minus 15 dB. Also draggable on the EQ view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1321.4053955078125,
+    704.6400146484375,
+    45.7911376953125,
+    123.25091552734375
+   ],
+   "def": "0.0 dB",
+   "min": "-15.0 dB",
+   "max": "+15.0 dB",
+   "panel": "sEq",
+   "n": 37
+  },
+  {
+   "label": "High",
+   "tip": "High shelf gain. Plus or minus 15 dB. Also draggable on the EQ view. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1434.3853759765625,
+    704.6400146484375,
+    45.7911376953125,
+    123.25091552734375
+   ],
+   "def": "0.0 dB",
+   "min": "-15.0 dB",
+   "max": "+15.0 dB",
+   "panel": "sEq",
+   "n": 38
+  },
+  {
+   "label": "Low slope",
+   "tip": "Low shelf slope (shelf Q). Higher = steeper with a small overshoot. Plugin extra; the manual does not give the hardware value, 0.7 is our assumption (a smooth shelf). Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1081.1700439453125,
+    827.8909301757812,
+    74.341796875,
+    62.6036376953125
+   ],
+   "def": "Q 0.70",
+   "min": "Q 0.30",
+   "max": "Q 2.00",
+   "panel": "sEq",
+   "n": 39
+  },
+  {
+   "label": "Mid-1 Q",
+   "tip": "Mid-1 bell width. Low Q = wide and gentle, high Q = narrow. 0.9 is our assumption for the unit (a broad musical bell; the manual does not state it). Scroll on the dot in the EQ view to change it. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1194.1500244140625,
+    827.8909301757812,
+    74.341796875,
+    62.6036376953125
+   ],
+   "def": "Q 0.90",
+   "min": "Q 0.30",
+   "max": "Q 5.00",
+   "panel": "sEq",
+   "n": 40
+  },
+  {
+   "label": "Mid-2 Q",
+   "tip": "Mid-2 bell width. 0.9 is our assumption (the manual does not state it). Scroll on the dot in the EQ view to change it. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1307.1300048828125,
+    827.8909301757812,
+    74.341796875,
+    62.6036376953125
+   ],
+   "def": "Q 0.90",
+   "min": "Q 0.30",
+   "max": "Q 5.00",
+   "panel": "sEq",
+   "n": 41
+  },
+  {
+   "label": "High slope",
+   "tip": "High shelf slope (shelf Q). Plugin extra; 0.7 is our assumption. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "sEq",
+   "id": "",
+   "r": [
+    1420.1099853515625,
+    827.8909301757812,
+    74.3419189453125,
+    62.6036376953125
+   ],
+   "def": "Q 0.70",
+   "min": "Q 0.30",
+   "max": "Q 2.00",
+   "panel": "sEq",
+   "n": 42
+  },
+  {
+   "label": "Output level",
+   "tip": "Gain or attenuation after the processing, to match your system level. As on the unit: fully left is off (-inf), the centre is 0 dB, fully right is +20 dB. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw big okn",
+   "section": "sOut",
+   "id": "",
+   "r": [
+    1975.4727783203125,
+    526.6109619140625,
+    146.7271728515625,
+    116.40362548828125
+   ],
+   "def": "0.0 dB",
+   "min": "-inf",
+   "max": "+20.0 dB",
+   "panel": "sOut",
+   "n": 43
+  },
+  {
+   "label": "Power",
+   "tip": "Lit = the channel is processing. Click to bypass the whole channel (the same as Before in the preview rig).",
+   "kind": "button",
+   "cls": "ledb",
+   "section": "sOut",
+   "id": "",
+   "r": [
+    2006.025634765625,
+    715.4000244140625,
+    85.62158203125,
+    23.47637939453125
+   ],
+   "panel": "sOut",
+   "n": 44
+  },
+  {
+   "label": "",
+   "tip": "Previous preset.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "pPrev",
+   "r": [
+    415.3491516113281,
+    32.62908935546875,
+    28.290863037109375,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 45
+  },
+  {
+   "label": "Init",
+   "tip": "Open the preset list: factory presets and your own. Factory presets are starting points, set them by ear.",
+   "kind": "button",
+   "cls": "pname",
+   "section": "",
+   "id": "pName",
+   "r": [
+    449.50909423828125,
+    31.650909423828125,
+    1272.293701171875,
+    33.2581787109375
+   ],
+   "panel": "header",
+   "n": 46
+  },
+  {
+   "label": "",
+   "tip": "Next preset.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "pNext",
+   "r": [
+    1727.6717529296875,
+    32.62908935546875,
+    28.458984375,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 47
+  },
+  {
+   "label": "Save",
+   "tip": "Save the current settings (and your recall notes) as your own preset. Stays on this device.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "pSave",
+   "r": [
+    1761.9998779296875,
+    32.62908935546875,
+    49.5203857421875,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 48
+  },
+  {
+   "label": "",
+   "tip": "Delete, export or import your presets.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "pMore",
+   "r": [
+    1817.389404296875,
+    32.62908935546875,
+    37.216796875,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 49
+  },
+  {
+   "label": "Guide",
+   "tip": "Quick guide: what each view and control does.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "bHelp",
+   "r": [
+    1870.257080078125,
+    32.62908935546875,
+    54.8546142578125,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 50
+  },
+  {
+   "label": "Settings",
+   "tip": "Info bubbles, eco mode and the look (colour theme).",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "bSet",
+   "r": [
+    1930.9808349609375,
+    32.62908935546875,
+    74.80029296875,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 51
+  },
+  {
+   "label": "About & Support",
+   "tip": "About Studio 87, privacy, and ways to support the project.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "bAbout",
+   "r": [
+    2011.6502685546875,
+    32.62908935546875,
+    121.3096923828125,
+    31.30181884765625
+   ],
+   "panel": "header",
+   "n": 52
+  },
+  {
+   "label": "EQ",
+   "tip": "EQ curve with the live spectrum. Drag a dot: up and down is the gain, left and right is the frequency (the low and high bands snap between their two choices). Shortcut: 1.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    67.04000091552734,
+    91.31999969482422,
+    102.70909881591797,
+    33.25818634033203
+   ],
+   "panel": "views",
+   "n": 53
+  },
+  {
+   "label": "Dynamics",
+   "tip": "Compressor and expander curve: input on the bottom, output up the side. Drag the corner for the threshold, the end for the ratio, the lower dot for the expander or gate threshold. Shortcut: 2.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    175.61817932128906,
+    91.31999969482422,
+    102.70909118652344,
+    33.25818634033203
+   ],
+   "panel": "views",
+   "n": 54
+  },
+  {
+   "label": "Tube",
+   "tip": "The tube: its transfer curve, the harmonics it adds at the current level, and its bandwidth. Reacts to the tube type, Colour, voltage and gain. Shortcut: 3.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    284.1963806152344,
+    91.31999969482422,
+    102.70907592773438,
+    33.25818634033203
+   ],
+   "panel": "views",
+   "n": 55
+  },
+  {
+   "label": "GR history",
+   "tip": "Gain reduction history of the compressor and the expander or gate. Shortcut: 4.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    392.7745666503906,
+    91.31999969482422,
+    102.70907592773438,
+    33.25818634033203
+   ],
+   "panel": "views",
+   "n": 56
+  },
+  {
+   "label": "Signal flow",
+   "tip": "Signal flow of the unit. Click the EQ block to move the EQ before or after the dynamics. Shortcut: 5.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    501.35272216796875,
+    91.31999969482422,
+    102.7091064453125,
+    33.25818634033203
+   ],
+   "panel": "views",
+   "n": 57
+  },
+  {
+   "label": "Recall notes",
+   "tip": "Recall notes: write down your hardware settings, the microphone and the room. Saved with the plugin and with presets. Shortcut: 6.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    609.930908203125,
+    91.31999969482422,
+    102.7091064453125,
+    33.25818634033203
+   ],
+   "panel": "views",
+   "n": 58
+  },
+  {
+   "label": "Test signal",
+   "tip": "Pick what the preview rig plays into the channel. 'Voice in a noisy room' has real pauses and a steady background noise, so the expander or gate has something to do. 'S sounds' is for the de-esser. 'Your file' uses the file you loaded.",
+   "kind": "menu",
+   "cls": "fld",
+   "section": "",
+   "id": "",
+   "r": [
+    382.59375,
+    1044,
+    200,
+    48
+   ],
+   "options": [
+    "Voice in a noisy room (gaps + background noise)",
+    "S sounds (de-esser test)",
+    "Voice, synthetic (sibilance, pops)",
+    "Trance supersaw lead 138",
+    "Acid 303 line 130",
+    "Rolling bass 140",
+    "Pink noise (wide)",
+    "Your file"
+   ],
+   "panel": "rig",
+   "n": 59
+  },
+  {
+   "label": "Play",
+   "tip": "Start or stop the test signal. Shortcut: Space.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "bPlay",
+   "r": [
+    594.59375,
+    1053.5,
+    62.3125,
+    29
+   ],
+   "panel": "rig",
+   "n": 60
+  },
+  {
+   "label": "Load file",
+   "tip": "Load your own audio file (wav, mp3, flac, ogg). It stays in this browser tab and is never uploaded.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "bFile",
+   "r": [
+    662.90625,
+    1054,
+    72.5,
+    28
+   ],
+   "panel": "rig",
+   "n": 61
+  },
+  {
+   "label": "Input trim",
+   "tip": "Level into the plugin, like the track gain in your DAW. This is the preview rig, not a plugin control. Double-click resets.",
+   "kind": "knob",
+   "cls": "kw",
+   "section": "",
+   "id": "",
+   "r": [
+    747.40625,
+    1052.5,
+    100.640625,
+    31
+   ],
+   "def": "0.0 dB",
+   "min": "-24.0 dB",
+   "max": "+12.0 dB",
+   "panel": "rig",
+   "n": 62
+  },
+  {
+   "label": "Before / After",
+   "tip": "Flip between the unprocessed input (Before) and the processed signal (After). Shortcut: B. With Match level on, both play at the same loudness, so you judge the sound and not the volume. A short crossfade avoids clicks.",
+   "kind": "button",
+   "cls": "pb",
+   "section": "",
+   "id": "bAB",
+   "r": [
+    864.046875,
+    1055,
+    129.546875,
+    26
+   ],
+   "panel": "rig",
+   "n": 63
+  },
+  {
+   "label": "Match level",
+   "tip": "Applies an automatic gain offset to the Before signal so it has the same perceived loudness as After. Uses K-weighted (ITU BS.1770) short-term loudness, smoothed over about a second, so it does not pump. Preview rig feature.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    999.59375,
+    1054,
+    88.578125,
+    28
+   ],
+   "panel": "rig",
+   "n": 64
+  },
+  {
+   "label": "Hear the difference",
+   "tip": "Plays only what the processing adds or removes (After minus Before, with the Before level matched when Match level is on). A quick way to hear what the channel does. Preview rig feature.",
+   "kind": "button",
+   "cls": "",
+   "section": "",
+   "id": "",
+   "r": [
+    1094.171875,
+    1054,
+    134.5625,
+    28
+   ],
+   "panel": "rig",
+   "n": 65
+  },
+  {
+   "label": "VU meter",
+   "tip": "Analog style VU meter. 0 VU is -20 dBFS here, like the hardware (0 VU is +4 dBu there).",
+   "kind": "display",
+   "cls": "vu",
+   "section": "sOut",
+   "id": "",
+   "r": [
+    1541.1600341796875,
+    526.6109619140625,
+    424.5308837890625,
+    144.7708740234375
+   ],
+   "letter": "A"
+  },
+  {
+   "label": "Tube name and description",
+   "tip": "High gain 12AX7 type (mu about 100). Our voicing: balanced, tight, a little less bass weight, silky top, low noise. Built on the published triode physics of its type; the flavour differences between the 12AX7 cats are our voicing.",
+   "kind": "display",
+   "cls": "tline",
+   "section": "sPre",
+   "id": "tLine",
+   "r": [
+    239.20001220703125,
+    579.4327392578125,
+    140.85818481445312,
+    26.2427978515625
+   ],
+   "letter": "B"
+  },
+  {
+   "label": "Gain reduction meter",
+   "tip": "Compressor gain reduction in dB, like the LED bar on the unit. The round light at the right is the expander or gate: dim for the first 5 dB of reduction, bright above that or when the gate is closed.",
+   "kind": "display",
+   "cls": "grm",
+   "section": "sDyn",
+   "id": "",
+   "r": [
+    516.0254516601562,
+    542.2618408203125,
+    520.3927612304688,
+    41.0836181640625
+   ],
+   "letter": "C"
+  },
+  {
+   "label": "Input and output level meters",
+   "tip": "Input and output level in dBFS: coloured bar is the level, white line is the peak, held for 2 seconds.",
+   "kind": "display",
+   "cls": "mcv",
+   "section": "sOut",
+   "id": "",
+   "r": [
+    1541.1600341796875,
+    695.8363647460938,
+    424.5308837890625,
+    62.6036376953125
+   ],
+   "letter": "D"
+  },
+  {
+   "label": "Voltage change",
+   "tip": "The tube voltage moves gradually after you switch it, 10 to 20 seconds, so you hear the change settle.",
+   "kind": "display",
+   "cls": "sg",
+   "section": "sPre",
+   "id": "",
+   "r": [
+    258.91650390625,
+    711.258056640625,
+    101.409912109375,
+    19.5635986328125
+   ],
+   "letter": "E"
+  },
+  {
+   "label": "Window size read-out",
+   "tip": "Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.",
+   "kind": "display",
+   "cls": "",
+   "section": "",
+   "id": "sizeT",
+   "r": [
+    1222.39501953125,
+    929.621826171875,
+    78.896484375,
+    13.694580078125
+   ],
+   "letter": "F"
+  },
+  {
+   "label": "Loudness readout",
+   "tip": "Integrated loudness in LUFS (ITU BS.1770, gated) of the unprocessed input and the processed output since you pressed Play, and the matched offset in dB. Click to reset the measurement.",
+   "kind": "display",
+   "cls": "lufs",
+   "section": "",
+   "id": "lufs",
+   "r": [
+    1234.734375,
+    1058,
+    112.015625,
+    20
+   ],
+   "letter": "G"
+  },
+  {
+   "label": "Preview rig label",
+   "tip": "Preview only: the plugin processes your DAW's audio. Mono unit: stereo tracks get the same processing on both sides.",
+   "kind": "display",
+   "cls": "lab",
+   "section": "",
+   "id": "",
+   "r": [
+    297.75,
+    1061.125,
+    72.84375,
+    13.75
+   ],
+   "letter": "H"
+  }
+ ],
+ "sections": [
+  {
+   "id": "sPre",
+   "title": "Preamp",
+   "sub": "gain 0.0 dB",
+   "r": [
+    67.04000091552734,
+    498.24365234375,
+    430.3999938964844,
+    412.792724609375
+   ]
+  },
+  {
+   "id": "sDyn",
+   "title": "Dynamics",
+   "sub": "compressor, expander/gate, de-esser",
+   "r": [
+    505.2654724121094,
+    498.24365234375,
+    539.9564208984375,
+    412.792724609375
+   ]
+  },
+  {
+   "id": "sEq",
+   "title": "EQ",
+   "sub": "4 band, +-15 dB",
+   "r": [
+    1053.0472412109375,
+    498.24365234375,
+    469.52734375,
+    412.792724609375
+   ]
+  },
+  {
+   "id": "sOut",
+   "title": "Output",
+   "sub": "0 VU = -20 dBFS",
+   "r": [
+    1530.4000244140625,
+    498.24365234375,
+    602.5599365234375,
+    412.792724609375
+   ]
+  }
+ ],
+ "W": 2200,
+ "H": 1100,
+ "dialogs": {
+  "Guide": "QUICK GUIDE\nSIGNAL PATH\n\nInput, preamp (gain, tube, low cut, invert), then the EQ (if set to pre), the expander or gate, the compressor with de-esser, the EQ (if set to post) and the output level.\n\nVIEWS\nEQ: drag the four dots. Double-click a dot to flatten it.\nDynamics: drag the threshold, the ratio end and the expander or gate dot.\nTube: see what the tube does at your level: curve, harmonics, bandwidth.\nGR history, Signal flow, Recall notes.\nTUBES\nTen cat tubes on three tube types, from Clean to Heavy; Variation sets how different they are. The Colour knob scales the effect from almost clean to the full voicing.\nTube voltage Normal adds warmth; High gives more gain and headroom. The change settles over 10 to 20 seconds.\nSTART HERE\nPress Play, pick a preset, raise Gain to push the tube, and judge by ear.\nUse Compare: bypass to hear what changed.\nCLOSE",
+  "About & Support": "ABOUT & SUPPORT\n\nPurrr Voice Channel by Studio 87, AGPL-3.0-or-later. This page is a design mockup that plays test signals in your browser.\n\nA tube channel strip for voices and instruments: a tube preamp with ten selectable tubes, an expander or gate, a compressor and limiter with de-esser, and a four band EQ that can sit before or after the dynamics. Made as a software companion to a hardware channel strip. All voicing is our own; nothing is measured from any real tube or unit.\n\nSUPPORT\n\nIf it helps your music, a coffee on Ko-fi keeps new plugins coming.\n\n\u2615 SUPPORT STUDIO 87 ON KO-FI\nGITHUB\nCLOSE",
+  "Settings": "SETTINGS\nInfo bubbles after 1 s of hovering\nON\nEco mode (fewer screen updates, less CPU; audio is not affected)\nOFF\nLook (colour theme)\nPurrOne (dark, default)\nNeon Navy\nPurple Soda Pop\n\nDrawing stops by itself when this tab is not in front. Audio, automation and MIDI keep running in the real plugin.\n\nCLOSE"
+ },
+ "views": [
+  {
+   "key": "eq",
+   "label": "EQ",
+   "tip": "EQ curve with the live spectrum. Drag a dot: up and down is the gain, left and right is the frequency (the low and high bands snap between their two choices). Shortcut: 1."
+  },
+  {
+   "key": "dynamics",
+   "label": "Dynamics",
+   "tip": "Compressor and expander curve: input on the bottom, output up the side. Drag the corner for the threshold, the end for the ratio, the lower dot for the expander or gate threshold. Shortcut: 2."
+  },
+  {
+   "key": "tube",
+   "label": "Tube",
+   "tip": "The tube: its transfer curve, the harmonics it adds at the current level, and its bandwidth. Reacts to the tube type, Colour, voltage and gain. Shortcut: 3."
+  },
+  {
+   "key": "gr_history",
+   "label": "GR history",
+   "tip": "Gain reduction history of the compressor and the expander or gate. Shortcut: 4."
+  },
+  {
+   "key": "signal_flow",
+   "label": "Signal flow",
+   "tip": "Signal flow of the unit. Click the EQ block to move the EQ before or after the dynamics. Shortcut: 5."
+  },
+  {
+   "key": "recall_notes",
+   "label": "Recall notes",
+   "tip": "Recall notes: write down your hardware settings, the microphone and the room. Saved with the plugin and with presets. Shortcut: 6."
+  }
+ ],
+ "disp": [
+  67.04000091552734,
+  132.4036407470703,
+  2065.919921875,
+  358.0145263671875
+ ],
+ "errors": [],
+ "groups": [
+  {
+   "id": "sPre",
+   "title": "Preamp",
+   "sub": "gain 0.0 dB"
+  },
+  {
+   "id": "sDyn",
+   "title": "Dynamics",
+   "sub": "compressor, expander/gate, de-esser"
+  },
+  {
+   "id": "sEq",
+   "title": "EQ",
+   "sub": "4 band, +-15 dB"
+  },
+  {
+   "id": "sOut",
+   "title": "Output",
+   "sub": "0 VU = -20 dBFS"
+  },
+  {
+   "id": "header",
+   "title": "Header: presets and windows",
+   "sub": ""
+  },
+  {
+   "id": "views",
+   "title": "Display views",
+   "sub": ""
+  },
+  {
+   "id": "rig",
+   "title": "Preview rig",
+   "sub": "not part of the plugin"
+  }
+ ]
+}

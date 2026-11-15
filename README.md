@@ -5,6 +5,7 @@
 A tube channel strip plugin in the style of the ART Voice Channel: tube preamp, expander/gate, compressor/limiter, de-esser and a 4 band EQ in one window. Free and open source, VST3 for Linux (macOS and Windows later). By Studio 87.
 
 <p align="center"><img src="docs/screenshot.png" alt="Purrr Voice Channel design mockup" width="900"></p>
+<p align="center"><sub>Screenshot of the design mockup with the test voice playing. This is not a plugin window: the plugin is not built yet.</sub></p>
 
 ## Status
 Design mockup approved, plugin not built yet. The mockup is a playable page that runs the real signal chain in the browser (tube model, dynamics, EQ, loudness readout): [open the interactive mockup](docs/mockup/index.html) in your browser, or [try it on the Studio 87 website](https://speakingcolors.github.io/purrrvoicechannel/) once GitHub Pages is on. The plugin will match it control for control.
@@ -15,6 +16,9 @@ Design mockup approved, plugin not built yet. The mockup is a playable page that
 - **Dynamics:** expander or gate, compressor or limiter (release 0.1 ms to 3 s), de-esser, soft knee, sidechain high-pass, auto makeup, true-peak limiter.
 - **EQ:** 4 bands, plus or minus 15 dB, pre or post dynamics, per-band Q.
 - **Checking:** before and after with level match, LUFS readout, gain reduction history, dB scale on every meter.
+
+## Manual
+[Manual (PDF)](docs/Purrr_Voice_Channel_manual.pdf): an interface tour of the mockup with every control, its range, default and info bubble text. It is built from the mockup page by `tools/shoot_tour.py` (reads the controls and tooltips from the page itself) and `tools/make_manual.py`. There is no release or manual workflow in this repo yet, so the PDF is rebuilt by hand and committed.
 
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md).

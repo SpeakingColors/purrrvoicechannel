@@ -1,0 +1,13 @@
+# Intro
+Purrr Voice Channel is a tube channel strip in the style of the ART Voice Channel: tube preamp, expander or gate, compressor or limiter, de-esser and a 4 band EQ in one window. It is free and open source (AGPL-3.0-or-later), made by Studio 87.
+
+# Status
+The plugin is not built yet. This manual describes the approved design mockup (docs/mockup/index.html), a playable web page that runs the signal chain in the browser. Every picture, range and info bubble text in it was read from that page by tools/shoot_tour.py. The plugin will match the mockup control for control. The preview rig at the bottom of the mockup (test signal, Play, Load file, Before / After, Match level, Hear the difference) is not part of the plugin.
+
+# Under the hood
+- Preamp: gain 0 to +60 dB, pad, invert, low cut, impedance tone, tube voltage (normal or high).
+- Tubes: ten cat tubes on three real tube types (12AU7, 12AT7, 12AX7, new and aged), a Koren triode model with 4x oversampling and ADAA. The Gain knob drives the tube. Voicing, Colour and Variation shape how different the tubes sound.
+- Dynamics: expander or gate, compressor or limiter (release 0.1 ms to 3 s), de-esser, soft knee, sidechain high-pass, auto makeup, true-peak limiter.
+- EQ: 4 bands, plus or minus 15 dB, pre or post dynamics, per-band Q.
+- Checking: before and after with level match, LUFS readout, gain reduction history, dB scale on every meter.
+- All voicing is our own; nothing is measured from any real tube or unit.
