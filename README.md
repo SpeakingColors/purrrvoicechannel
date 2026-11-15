@@ -7,7 +7,7 @@ A tube channel strip plugin in the style of the ART Voice Channel: tube preamp, 
 <p align="center"><img src="docs/screenshot.png" alt="Purrr Voice Channel design mockup" width="900"></p>
 
 ## Status
-Design mockup approved, plugin not built yet. The mockup is a playable page that runs the real signal chain in the browser (tube model, dynamics, EQ, loudness readout): [open the interactive mockup](https://speakingcolors.github.io/purrrvoicechannel/) (needs GitHub Pages switched on for `/docs`; the page is also in `docs/mockup/index.html`, open it in any browser). The plugin will match it control for control.
+Design mockup approved, plugin not built yet. The mockup is a playable page that runs the real signal chain in the browser (tube model, dynamics, EQ, loudness readout): [open the interactive mockup](docs/mockup/index.html) in your browser, or [try it on the Studio 87 website](https://speakingcolors.github.io/purrrvoicechannel/) once GitHub Pages is on. The plugin will match it control for control.
 
 ## What it has
 - **Preamp:** gain 0 to +60 dB, pad, invert, low cut, impedance tone, tube voltage (normal or high).
