@@ -3,7 +3,10 @@
 - [x] Interactive design mockup with the real signal chain (tube, dynamics, EQ, loudness)
 - [x] Ten tubes with different voicing, drive-dependent saturation
 - [ ] Measure and tune each tube (harmonics, level, tone) and confirm by ear
-- [ ] Add the mockup page to this repo (docs/mockup)
+- [x] Mockup page in this repo (docs/mockup) with a web page that plays it (docs/index.html)
+- [ ] Switch on GitHub Pages for /docs (owner: Settings, Pages)
+- [ ] Rename the Init preset (the tube is always in the path now)
+- [ ] Save Voicing in presets; tube view to follow Voicing and Colour
 - [ ] C++ core ported from the mockup DSP, with unit tests
 - [ ] JUCE editor that matches the mockup
 - [ ] VST3 build for Linux, then installers (offline, with manual and uninstaller)
