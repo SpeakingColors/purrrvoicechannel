@@ -321,7 +321,7 @@ body { user-select:none; -webkit-user-select:none; } textarea, input, select { u
         
       </div>
     </section>
-    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
+    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9.1 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
   </div>
   <div class="cheek r"></div>
 </div>
@@ -475,8 +475,7 @@ document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !m
 function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 function aboutCard(name, extra) {
   openCard('<h2>About &amp; Support</h2><p><b>' + name + '</b> by Studio 87, AGPL-3.0-or-later. This page is a design mockup that plays test signals in your browser.</p>' + (extra || "") +
-    '<h3>Support</h3><p>If it helps your music, a coffee on Ko-fi keeps new plugins coming.</p><div class="row"><a class="btn" href="https://ko-fi.com/studio87" target="_blank" rel="noopener">&#9749; Support Studio 87 on Ko-fi</a><a class="btn" href="studio87://open?product=purrrvoicechannel" data-tip="Opens Studio 87 Gear Updater to check this plugin for updates. Nothing is sent anywhere. If nothing opens, install Studio 87 Gear Updater from github.com/SpeakingColors/gearupdater/releases.">Open Studio 87 Gear Updater</a><a class="btn" href="https://github.com/SpeakingColors" target="_blank" rel="noopener">GitHub</a><button data-close>Close</button></div>');
-  $$("[data-tip]", card).forEach(function (el) { attachTip(el, el.textContent.trim(), el.getAttribute("data-tip")); });
+    '<h3>Support</h3><p>If it helps your music, a coffee on Ko-fi keeps new plugins coming.</p><div class="row"><a class="btn" href="https://ko-fi.com/studio87" target="_blank" rel="noopener">&#9749; Support Studio 87 on Ko-fi</a><a class="btn" href="https://github.com/SpeakingColors" target="_blank" rel="noopener">GitHub</a><button data-close>Close</button></div>');
 }
 function settingsCard() {
   openCard('<h2>Settings</h2><div class="set"><span>Info bubbles after 1 s of hovering</span><button id="sBub" aria-pressed="' + SET.bubbles + '">' + (SET.bubbles ? "On" : "Off") + '</button></div>' +
@@ -738,7 +737,7 @@ function VoiceDSP(sr) {
       latt: Math.log(T.att), lrel: Math.log(T.rel), ds: T.ds / 100, ldsf: Math.log(T.dsf), dsthr: T.dsthr, dsl: T.dsl ? 1 : 0, dsw: T.dsw ? 1 : 0, col: colk, vm: vm, cc: 0.7 * colk * colk + 0.1 * colk, gt2: Math.max(0, Math.min(1, (colk - 0.4) / 0.6)), fc: 0, vls: 0, vhs: 0, itdb: T.itrim, mkdb: T.makeup, mix: T.mix / 100, knee: T.knee, lsch: Math.log(Math.max(20, T.schp || 100)), link: T.link / 100,
       ethr: T.ethr, erange: T.erange, erat: T.erat, ehys: T.ehys, lerel: Math.log(T.erel), leatt: Math.log(T.eatt), lkh: Math.log(T.ekhp), lkl: Math.log(T.eklp), clk: T.elook ? 1 : 0, eonm: T.eon ? 1 : 0, tn: T.tnoise ? Math.pow(10, nzL / 20) * 1.732 : 0,
       amkm: T.amk ? 1 : 0, hpm: T.schp > 0 ? 1 : 0, arm: T.arel ? 1 : 0, gmdb: T.match ? LB.off : 0 };
-    tgt.fc = 24000 + Math.max(3500 - 24000, (sp.fc * (1 + 0.3 * tubeK) - 24000) * ex * vm); tgt.vls = Math.max(-18, Math.min(18, sp.ls * ex * vm)); tgt.vhs = Math.max(-18, Math.min(18, sp.hs * ex * vm));
+    tgt.fc = 24000 + Math.max(3500 - 24000, (sp.fc * (1 + 0.3 * tubeK) - 24000) * ex * (vm <= 1 ? vm : 1 + 0.2 * (vm - 1))); tgt.vls = Math.max(-18, Math.min(18, sp.ls * ex * vm)); tgt.vhs = Math.max(-18, Math.min(18, sp.hs * ex * vm));
     if (T.tube !== (nxtId || curId) && TSP[T.tube]) { if (tabGet(T.tube, false)) { if (nxtId) { curId = nxtId; } nxtId = T.tube; tw = 0; sagK = 0; } }
     sagA = sp.sag * ex;
     var eqMoved = false, hpMoved = false, keyMoved = false, dsMoved = false, k, d;
@@ -1131,7 +1130,7 @@ GEN.sss = function () { /* sibilants with vowels between, for the de-esser */
 /* ---------- tube model (shared by the audio and the displays). Our own voicing. ---------- */
 function tubeCfg() {
   var t = TIDX[S.tube] || TIDX.ax7, k = E.tubeK, col = S.tcol / 100, sp = DD.tsp(S.tube), ex = S.tvar <= 0 ? 0.2 : 0.2 + 4.8 * Math.pow(S.tvar / 100, 1.2), vm = clamp((S.tvoice === undefined ? 100 : S.tvoice) / 100, 0, 3);
-  return { id: S.tube, k: k, col: col, fc: 24000 + Math.max(-20500, (sp.fc * (1 + 0.3 * k) - 24000) * ex * vm), t: t };
+  return { id: S.tube, k: k, col: col, fc: 24000 + Math.max(-20500, (sp.fc * (1 + 0.3 * k) - 24000) * ex * (vm <= 1 ? vm : 1 + 0.2 * (vm - 1))), t: t };
 }
 function tubeOut(x, T) { var y = DD.xfer(T.id, T.k, x), cc = 0.7 * T.col * T.col + 0.1 * T.col, g2 = Math.max(0, Math.min(1, (T.col - 0.4) / 0.6)), ce = Math.max(T.ap || 0.1, 1e-6); y += cc * y * y / (Math.abs(y) + 0.02); if (g2 > 0.001) y += g2 * (ce * Math.tanh(y / (0.35 * ce)) - y); return y; }
 function harmonics(amp, T) {
