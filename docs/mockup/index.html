@@ -321,7 +321,7 @@ body { user-select:none; -webkit-user-select:none; } textarea, input, select { u
         
       </div>
     </section>
-    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.8 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
+    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
   </div>
   <div class="cheek r"></div>
 </div>
@@ -901,7 +901,7 @@ var TIDX = {}; TUBES.forEach(function (t) { TIDX[t.id] = t; });
 
 /* ---------- parameters ---------- */
 def("gpos", 0); def("imp", 1200); def("pad", false); def("ph", false); def("lc", false);
-def("tube", "ax7"); def("tcol", 60); def("tvolt", "normal"); def("tvar", 50); def("tnoise", false);
+def("tube", "ax7"); def("tcol", 50); def("tvolt", "normal"); def("tvar", 30); def("tvoice", 100); def("tnoise", false);
 def("eqpos", "pre"); def("eqbyp", false);
 def("lg", 0); def("lf", 150); def("lq", 0.7); def("m1g", 0); def("m1f", 400); def("m1q", 0.9); def("m2g", 0); def("m2f", 3500); def("m2q", 0.9); def("hg", 0); def("hf", 15000); def("hq", 0.7);
 def("thr", -20); def("ratio", 1); def("att", 10); def("rel", 400); def("hwr", false); def("arel", false); def("itrim", 0); def("makeup", 0); def("amk", false); def("knee", 6); def("schp", 80); def("mix", 100); def("link", 100); def("lim", true);
@@ -1130,12 +1130,12 @@ GEN.sss = function () { /* sibilants with vowels between, for the de-esser */
 
 /* ---------- tube model (shared by the audio and the displays). Our own voicing. ---------- */
 function tubeCfg() {
-  var t = TIDX[S.tube] || TIDX.ax7, k = E.tubeK, col = S.tcol / 100, sp = DD.tsp(S.tube), ex = Math.min(1 + 2 * S.tvar / 100, 3);
-  return { id: S.tube, k: k, col: col, fc: 24000 + Math.max(-19000, (sp.fc * (1 + 0.3 * k) - 24000) * ex) * col, t: t };
+  var t = TIDX[S.tube] || TIDX.ax7, k = E.tubeK, col = S.tcol / 100, sp = DD.tsp(S.tube), ex = S.tvar <= 0 ? 0.2 : 0.2 + 4.8 * Math.pow(S.tvar / 100, 1.2), vm = clamp((S.tvoice === undefined ? 100 : S.tvoice) / 100, 0, 3);
+  return { id: S.tube, k: k, col: col, fc: 24000 + Math.max(-20500, (sp.fc * (1 + 0.3 * k) - 24000) * ex * vm), t: t };
 }
-function tubeOut(x, T) { return x + T.col * (DD.xfer(T.id, T.k, x) - x); }
+function tubeOut(x, T) { var y = DD.xfer(T.id, T.k, x), cc = 0.7 * T.col * T.col + 0.1 * T.col, g2 = Math.max(0, Math.min(1, (T.col - 0.4) / 0.6)), ce = Math.max(T.ap || 0.1, 1e-6); y += cc * y * y / (Math.abs(y) + 0.02); if (g2 > 0.001) y += g2 * (ce * Math.tanh(y / (0.35 * ce)) - y); return y; }
 function harmonics(amp, T) {
-  var N = 512, h = [], i, m;
+  var N = 512, h = [], i, m; T.ap = amp;
   for (m = 1; m <= 8; m++) { var a = 0, b = 0; for (i = 0; i < N; i++) { var y = tubeOut(amp * Math.sin(2 * Math.PI * i / N), T); a += y * Math.sin(2 * Math.PI * m * i / N); b += y * Math.cos(2 * Math.PI * m * i / N); } h.push(2 * Math.sqrt(a * a + b * b) / N); }
   return h;
 }
@@ -1157,7 +1157,7 @@ function magDb(c, f) {
 function eqTotalDb(f, cs) { var s = 0; for (var i = 0; i < 4; i++) s += magDb(cs[i], f); return s; }
 
 /* ---------- audio engine (v3): the DSP core is voicedsp.js; it runs in an AudioWorklet (audio thread) and falls back to the main thread ---------- */
-var PP = ["gpos", "pad", "imp", "ph", "lc", "tvolt", "tcol", "tvar", "tnoise", "tube", "eqpos", "eqbyp", "lg", "lf", "lq", "m1g", "m1f", "m1q", "m2g", "m2f", "m2q", "hg", "hf", "hq", "thr", "ratio", "att", "rel", "arel", "itrim", "makeup", "amk", "knee", "schp", "mix", "link", "lim", "ds", "dsf", "dsthr", "dsw", "dsl", "eon", "emode", "ethr", "erat", "erange", "eatt", "ehold", "erel", "ehys", "elook", "ekhp", "eklp", "out", "byp", "match", "delta"];
+var PP = ["gpos", "pad", "imp", "ph", "lc", "tvolt", "tcol", "tvoice", "tvar", "tnoise", "tube", "eqpos", "eqbyp", "lg", "lf", "lq", "m1g", "m1f", "m1q", "m2g", "m2f", "m2q", "hg", "hf", "hq", "thr", "ratio", "att", "rel", "arel", "itrim", "makeup", "amk", "knee", "schp", "mix", "link", "lim", "ds", "dsf", "dsthr", "dsw", "dsl", "eon", "emode", "ethr", "erat", "erange", "eatt", "ehold", "erel", "ehys", "elook", "ekhp", "eklp", "out", "byp", "match", "delta"];
 function paramPack(first) { var o = {}; PP.forEach(function (k) { o[k] = S[k]; }); if (first) o.tubeK = E.tubeK; return o; }
 function sendParams() { if (E.node && E.node.port) E.node.port.postMessage(paramPack()); else if (E.dsp) E.dsp.set(paramPack()); }
 var WSRC = "var VoiceDSP=" + VoiceDSP.toString() + ";registerProcessor('vc-dsp',class extends AudioWorkletProcessor{constructor(){super();this.d=VoiceDSP(sampleRate);this.n=0;this.a={inL:0,inR:0,outL:0,outR:0,rms:0,gr:0,eg:0,tubeK:0};this.port.onmessage=e=>{this.d.set(e.data)}}process(i,o){var a=i[0],b=o[0];if(!b||!b.length)return true;if(!a||!a.length){return true}var L=a[0],R=a[1]||a[0],s=this.d.process(L,R,b[0],b[1]||b[0],b[0].length),A=this.a;A.inL=Math.max(A.inL,s.inL);A.inR=Math.max(A.inR,s.inR);A.outL=Math.max(A.outL,s.outL);A.outR=Math.max(A.outR,s.outR);A.rms=Math.max(A.rms,s.rms);A.gr=Math.max(A.gr,s.gr);A.eg=Math.max(A.eg,s.eg);A.tubeK=s.tubeK;A.dgr=Math.max(A.dgr||0,s.dgr);A.st=s;this.n+=b[0].length;if(this.n>=1536){this.n=0;this.port.postMessage(A);this.a={inL:0,inR:0,outL:0,outR:0,rms:0,gr:0,eg:0,tubeK:s.tubeK,dgr:0}}return true}});";
@@ -1317,7 +1317,7 @@ function drawTube(c) {
   txt(g, "Transfer curve", cx, 14, CC["--ink-dim"], "left", 11);
   var R = 1.5, mx = function (v) { return cx + (v + R) / (2 * R) * cw; }, my = function (v) { return cy + cw - (v + R) / (2 * R) * cw; };
   g.strokeStyle = CC["--ink-dim"]; g.setLineDash([4, 4]); g.beginPath(); g.moveTo(mx(-R), my(-R)); g.lineTo(mx(R), my(R)); g.stroke(); g.setLineDash([]);
-  g.lineWidth = 2.6; g.strokeStyle = CC["--cAcc"]; g.beginPath(); for (i = 0; i <= 200; i++) { var xv = -R + i / 200 * 2 * R, yv = clamp(tubeOut(xv, T), -R, R); if (i) g.lineTo(mx(xv), my(yv)); else g.moveTo(mx(xv), my(yv)); } g.stroke();
+  T.ap = amp; g.lineWidth = 2.6; g.strokeStyle = CC["--cAcc"]; g.beginPath(); for (i = 0; i <= 200; i++) { var xv = -R + i / 200 * 2 * R, yv = clamp(tubeOut(xv, T), -R, R); if (i) g.lineTo(mx(xv), my(yv)); else g.moveTo(mx(xv), my(yv)); } g.stroke();
   g.beginPath(); g.arc(mx(amp), my(clamp(tubeOut(amp, T), -R, R)), 5, 0, 7); g.fillStyle = CC["--cR"]; g.fill(); g.beginPath(); g.arc(mx(-amp), my(clamp(tubeOut(-amp, T), -R, R)), 5, 0, 7); g.fill();
   txt(g, "drive now: " + (20 * Math.log10(amp)).toFixed(1) + " dBFS peak", cx, cy + cw + 16, CC["--cR"], "left", 11);
   var hx = cx + cw + 50, hw = w - hx - 20, base = cy + cw * 0.58; txt(g, "Harmonics added at this level (dB below the fundamental)", hx, 14, CC["--ink-dim"], "left", 11);
@@ -1326,7 +1326,7 @@ function drawTube(c) {
     g.fillStyle = i % 2 === 1 ? CC["--cM"] : CC["--cL"]; g.fillRect(bx, by, bw, bh); txt(g, "H" + (i + 1), bx + bw / 2, base + 14, CC["--ink-dim"], "center", 11); txt(g, dbc < -89 ? "-90" : dbc.toFixed(0), bx + bw / 2, by - 4, CC["--ink"], "center", 10); }
   txt(g, "even (teal) sound warm, odd (blue) sound edgy. THD " + (Math.sqrt(thd) * 100).toFixed(2) + " %", hx, base + 32, CC["--ink-dim"], "left", 11);
   var fy = base + 54, fh = h - 30 - fy - 8; if (fh > 14) { txt(g, "Bandwidth", hx, fy, CC["--ink-dim"], "left", 11); g.strokeStyle = CC["--cAcc"]; g.lineWidth = 2; g.beginPath(); for (i = 0; i <= 100; i++) { var f = 20 * Math.pow(1000, i / 100), m = 20 * Math.log10(1 / Math.sqrt(1 + Math.pow(f / T.fc, 2))), px = hx + i / 100 * hw, py = fy + 8 + clamp(-m / 12, 0, 1) * fh; if (i) g.lineTo(px, py); else g.moveTo(px, py); } g.stroke(); txt(g, "-3 dB at " + fmtHz(T.fc), hx + hw, fy, CC["--cAcc"], "right", 11); }
-  txt(g, "Active tube: " + t.name + " (" + t.eu + ")  ·  " + t.rate + "  ·  Colour " + S.tcol + " %  ·  voltage " + (S.tvolt === "high" ? "HIGH" : "NORMAL") + (E.tubeK > 0.02 && E.tubeK < 0.98 ? " (settling)" : ""), w - 14, h - 8, CC["--cAcc"], "right", 12);
+  txt(g, "Active tube: " + t.name + " (" + t.eu + ")  ·  " + t.rate + "  ·  Voicing " + S.tvoice + " %  ·  Colour " + S.tcol + " %  ·  voltage " + (S.tvolt === "high" ? "HIGH" : "NORMAL") + (E.tubeK > 0.02 && E.tubeK < 0.98 ? " (settling)" : ""), w - 14, h - 8, CC["--cAcc"], "right", 12);
 }
 
 /* ---------- GR history ---------- */
@@ -1436,7 +1436,7 @@ PAINT.push(function (dt) {
 /* ---------- factory presets (starting points, set by ear) ---------- */
 function P(name, o) { var v = {}; PKEYS.forEach(function (k) { v[k] = DEF[k]; }); delete v.notes; for (var k in o) v[k] = o[k]; return { name: name, v: v }; }
 var FACT = [
-  P("Init (does nothing)", { tcol: 0 }),
+  P("Init (clean start)", { tcol: 0 }),
   P("Lead Vocal, polished", { lc: true, tube: "at7", tcol: 45, thr: -22, ratio: 2.5, att: 8, rel: 300, ds: 40, dsf: 7000, eqpos: "pre", m1g: -2, m1f: 300, m2g: 2.5, m2f: 3500, hg: 3, hf: 15000 }),
   P("Rap / Spoken, tight", { lc: true, tube: "ax7", tcol: 50, thr: -26, ratio: 3.5, att: 3, rel: 200, ds: 55, dsf: 6500, m1g: -2, m1f: 250, m2g: 3, m2f: 4000, hg: 2, hf: 5000 }),
   P("Warm Tube Vocal", { tube: "at7a", tcol: 70, gpos: 12, lc: true, thr: -20, ratio: 2, att: 15, rel: 500, lg: 2, lf: 150, m2g: 1.5, m2f: 3000, hg: 2, hf: 15000 }),
