@@ -321,7 +321,7 @@ body { user-select:none; -webkit-user-select:none; } textarea, input, select { u
         
       </div>
     </section>
-    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9.1 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
+    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9.2 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
   </div>
   <div class="cheek r"></div>
 </div>
@@ -635,17 +635,17 @@ function VoiceDSP(sr) {
   function Ring(M) { return { b: new Float64Array(2 * M), p: 0 }; }
   function push(r, M, v) { r.b[r.p] = v; r.b[r.p + M] = v; r.p = r.p + 1 === M ? 0 : r.p + 1; }
   function dot(r, H) { var s = 0, o = r.p, b = r.b, h = H.hn, nz = H.nz, n = nz.length; for (var q = 0; q < n; q++) s += h[q] * b[o + nz[q]]; return s; }
-  function ch() { return { u1: Ring(47), d1: Ring(47), u2: Ring(17), d2: Ring(17), xp: 0, fp: 0, lp: 0, dcx: 0, dcy: 0, lc: 0, vz: new Float64Array(4), sg: 0, bz: new Float64Array(2), hz2: new Float64Array(2), kz: new Float64Array(4), dv: 0, dg: 0, z: new Float64Array(8), tz: new Float64Array(4), hz: new Float64Array(2), kin: new Float64Array(4), kout: new Float64Array(4), dl: new Float64Array(1024), gdl: new Float64Array(1024), dp: 0, lv: 0, g1: 0, g2: 0, lb: new Float64Array(LMASK + 1) }; }
+  function ch() { return { u1: Ring(47), d1: Ring(47), u2: Ring(17), d2: Ring(17), xp: 0, fp: 0, lp: 0, dcx: 0, dcy: 0, lc: 0, vz: new Float64Array(8), sg: 0, bz: new Float64Array(2), hz2: new Float64Array(2), kz: new Float64Array(4), dv: 0, dg: 0, z: new Float64Array(8), tz: new Float64Array(4), hz: new Float64Array(2), kin: new Float64Array(4), kout: new Float64Array(4), dl: new Float64Array(1024), gdl: new Float64Array(1024), dp: 0, lv: 0, g1: 0, g2: 0, lb: new Float64Array(LMASK + 1) }; }
   var C = [ch(), ch()];
   var T = { gpos: 0, pad: false, imp: 1200, ph: false, lc: false, tvolt: "normal", tcol: 60, tvoice: 100, eqpos: "pre", eqbyp: false, lg: 0, lf: 150, lq: 0.7, m1g: 0, m1f: 400, m1q: 0.9, m2g: 0, m2f: 3500, m2q: 0.9, hg: 0, hf: 15000, hq: 0.7,
     thr: -20, ratio: 1, ds: 0, dsf: 6000, att: 10, rel: 400, eon: false, ethr: -50, emode: "exp", out: 0, byp: false, tube: "ax7", dsthr: -32, dsw: false, dsl: false, erat: 1.5, eatt: 2, ehys: 4, elook: false, ekhp: 20, eklp: 20000, tvar: 50, tnoise: false,
     itrim: 0, makeup: 0, amk: false, mix: 100, knee: 6, schp: 0, link: 100, arel: false, erange: 60, erel: 40, ehold: 0, lim: true, match: false, delta: false };
   var c = { gdb: 0, odb: 0, imz: 0, lg: 0, lf: 150, lq: Math.log(0.7), m1g: 0, m1f: 400, m1q: Math.log(0.9), m2g: 0, m2f: 3500, m2q: Math.log(0.9), hg: 0, hf: 15000, hq: Math.log(0.7), thr: -20, ratio: 1, latt: Math.log(10), lrel: Math.log(400), ds: 0, ldsf: Math.log(6000), ethr: -48, col: 0.6, cc: 0, gt2: 0, vm: 1, fc: 18000,
-    vls: 0, vhs: 0, dsl: 0, itdb: 0, mkdb: 0, mix: 1, knee: 6, lsch: Math.log(100), link: 1, lerel: Math.log(40), amkm: 0, hpm: 0, arm: 0, gmdb: 0,
+    vls: 0, vhs: 0, vlm: 0, vpr: 0, dsl: 0, itdb: 0, mkdb: 0, mix: 1, knee: 6, lsch: Math.log(100), link: 1, lerel: Math.log(40), amkm: 0, hpm: 0, arm: 0, gmdb: 0,
     lcm: 0, sgn: 1, eqm: 1, cA: 1, cD: 0, dk: 1 };
   var inited = false, toggles = 0, tubeK = 0, curPos = "pre", gateOpen = true, hold = 0, openT = 0, lvE = 0, eg = 0, den = 1e-25, stp0 = 0;
   var gin0 = 1, gin = 1, gout0 = 1, gout = 1, it0 = 1, it1 = 1, mk0 = 1, mk1 = 1;
-  var vc = [[1, 0, 0, 0, 0], [1, 0, 0, 0, 0]], lastV = [9, 9], sagA = 0, sagK = 0, bpc = [1, 0, 0, 0, 0], lastDs = -1, eqc = [[1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0]], tc2 = [[1, 0, 0, 0, 0], [1, 0, 0, 0, 0]], hpc = [1, 0, 0, 0, 0], lastTone = 9, lastHp = -1;
+  var vc = [[1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0]], lastV = [9, 9, 9, 9], sagA = 0, sagK = 0, bpc = [1, 0, 0, 0, 0], lastDs = -1, eqc = [[1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0], [1, 0, 0, 0, 0]], tc2 = [[1, 0, 0, 0, 0], [1, 0, 0, 0, 0]], hpc = [1, 0, 0, 0, 0], lastTone = 9, lastHp = -1;
   var st = { toggles: 0, inL: 0, inR: 0, outL: 0, outR: 0, rms: 0, gr: 0, eg: 0, tubeK: 0, lgr: 0, shIn: -120, shOut: -120, off: 0, liIn: -120, liOut: -120, lat: 0, mk: 0 };
   function lin(d) { return Math.pow(10, d / 20); }
   /* ---------- analog matched biquad design (Vicanek): poles by matched z, zeros from the analog magnitude at DC, Nyquist and f0 ---------- */
@@ -734,10 +734,10 @@ function VoiceDSP(sr) {
     var tz = toneOf(T.imp).z, sp = TSP[T.tube] || TSP.ax7, vr = T.tvar <= 0 ? 0.2 : 0.2 + 4.8 * Math.pow(T.tvar / 100, 1.2), ex = vr, colk = T.tcol / 100, vm = Math.max(0, Math.min(3, (T.tvoice === undefined ? 100 : T.tvoice) / 100));
     var nzL = Math.min(-50, -90 + 5 * (5 - sp.nz) * (1 + T.tvar / 100));
     var tgt = { gdb: 0.6 * T.gpos - (T.pad ? 20 : 0) + 1.5 * tubeK + Math.max(-8, Math.min(8, sp.gt * ex * vm)), odb: T.out <= -59.5 ? -120 : T.out, imz: tz, lg: T.lg, lf: T.lf, lq: Math.log(T.lq), m1g: T.m1g, m1f: T.m1f, m1q: Math.log(T.m1q), m2g: T.m2g, m2f: T.m2f, m2q: Math.log(T.m2q), hg: T.hg, hf: T.hf, hq: Math.log(T.hq), thr: T.thr, ratio: T.ratio,
-      latt: Math.log(T.att), lrel: Math.log(T.rel), ds: T.ds / 100, ldsf: Math.log(T.dsf), dsthr: T.dsthr, dsl: T.dsl ? 1 : 0, dsw: T.dsw ? 1 : 0, col: colk, vm: vm, cc: 0.7 * colk * colk + 0.1 * colk, gt2: Math.max(0, Math.min(1, (colk - 0.4) / 0.6)), fc: 0, vls: 0, vhs: 0, itdb: T.itrim, mkdb: T.makeup, mix: T.mix / 100, knee: T.knee, lsch: Math.log(Math.max(20, T.schp || 100)), link: T.link / 100,
+      latt: Math.log(T.att), lrel: Math.log(T.rel), ds: T.ds / 100, ldsf: Math.log(T.dsf), dsthr: T.dsthr, dsl: T.dsl ? 1 : 0, dsw: T.dsw ? 1 : 0, col: colk, vm: vm, cc: 0.7 * colk * colk + 0.1 * colk, gt2: Math.max(0, Math.min(1, (colk - 0.4) / 0.6)), fc: 0, vls: 0, vhs: 0, vlm: 0, vpr: 0, itdb: T.itrim, mkdb: T.makeup, mix: T.mix / 100, knee: T.knee, lsch: Math.log(Math.max(20, T.schp || 100)), link: T.link / 100,
       ethr: T.ethr, erange: T.erange, erat: T.erat, ehys: T.ehys, lerel: Math.log(T.erel), leatt: Math.log(T.eatt), lkh: Math.log(T.ekhp), lkl: Math.log(T.eklp), clk: T.elook ? 1 : 0, eonm: T.eon ? 1 : 0, tn: T.tnoise ? Math.pow(10, nzL / 20) * 1.732 : 0,
       amkm: T.amk ? 1 : 0, hpm: T.schp > 0 ? 1 : 0, arm: T.arel ? 1 : 0, gmdb: T.match ? LB.off : 0 };
-    tgt.fc = 24000 + Math.max(3500 - 24000, (sp.fc * (1 + 0.3 * tubeK) - 24000) * ex * (vm <= 1 ? vm : 1 + 0.2 * (vm - 1))); tgt.vls = Math.max(-18, Math.min(18, sp.ls * ex * vm)); tgt.vhs = Math.max(-18, Math.min(18, sp.hs * ex * vm));
+    tgt.fc = 24000 + Math.max(3500 - 24000, (sp.fc * (1 + 0.3 * tubeK) - 24000) * ex * (vm <= 1 ? vm : 1 + 0.2 * (vm - 1))); tgt.vls = Math.max(-18, Math.min(18, sp.ls * ex * vm)); tgt.vhs = Math.max(-18, Math.min(18, sp.hs * ex * vm)); tgt.vlm = 2.5 * Math.max(0, vm - 1); tgt.vpr = 3 * Math.max(0, vm - 1);
     if (T.tube !== (nxtId || curId) && TSP[T.tube]) { if (tabGet(T.tube, false)) { if (nxtId) { curId = nxtId; } nxtId = T.tube; tw = 0; sagK = 0; } }
     sagA = sp.sag * ex;
     var eqMoved = false, hpMoved = false, keyMoved = false, dsMoved = false, k, d;
@@ -754,7 +754,7 @@ function VoiceDSP(sr) {
     if (keyMoved) { gkH = rbj(0, Math.exp(c.lkh), 0.7071); gkL = rbj(1, Math.min(Math.exp(c.lkl), 0.45 * sr), 0.7071); }
     if (dsMoved) bpc = rbj(2, Math.min(Math.exp(c.ldsf), 0.45 * sr), 1.4);
     dgA = 1 - Math.exp(-1 / (0.0004 * sr)); dgR = 1 - Math.exp(-1 / (0.03 * sr)); dvR = Math.exp(-1 / (0.002 * sr)); denvA = 1 - Math.exp(-1 / (0.3 * sr)); denvR = 1 - Math.exp(-1 / (1.5 * sr));
-    osA = 1 - Math.exp(-2 * PI * Math.min(c.fc, osr * 0.45) / osr); if (c.vls !== lastV[0] || c.vhs !== lastV[1]) { vc = [design(1, 160, c.vls, 0.7), design(2, 5000, c.vhs, 0.7)]; lastV[0] = c.vls; lastV[1] = c.vhs; }
+    osA = 1 - Math.exp(-2 * PI * Math.min(c.fc, osr * 0.45) / osr); if (c.vls !== lastV[0] || c.vhs !== lastV[1] || c.vlm !== lastV[2] || c.vpr !== lastV[3]) { vc = [design(1, 160, c.vls, 0.7), design(2, 5000, c.vhs, 0.7), design(0, 300, c.vlm, 0.8), design(0, 3200, c.vpr, 0.9)]; lastV[0] = c.vls; lastV[1] = c.vhs; lastV[2] = c.vlm; lastV[3] = c.vpr; }
     if (nxtId) { tw += twStep * SUB; if (tw >= 1) { curId = nxtId; nxtId = ""; tw = 0; } }
     if (nxtId || tubeK !== lastKE || pendB || !ready()) { setWeights(); lastKE = tubeK; pendB = !ready(); }
     /* loudness: short term offset between the unprocessed and the processed signal, held while quiet */
@@ -788,7 +788,7 @@ function VoiceDSP(sr) {
           for (r = 0; r < 2; r++) { var w = r ? ub : ua; push(ci.u2, 17, w); var p0 = 2 * dot(ci.u2, H2); push(ci.u2, 17, 0); var p1 = 2 * dot(ci.u2, H2);
             push(ci.d2, 17, tubeStage(ci, p0)); var back = dot(ci.d2, H2); push(ci.d2, 17, tubeStage(ci, p1)); if (r) ub = back; else ua = back; }
           push(ci.d1, 47, ua); v = dot(ci.d1, H1); push(ci.d1, 47, ub); var tmE = c.cc * v * v / (Math.abs(v) + 0.02); ci.em = (ci.em || 0); ci.em += (tmE - ci.em) * 0.0015; v += tmE - ci.em; var avS = Math.abs(v), ceN = ci.ce || 0; ceN = avS > ceN ? avS : ceN * 0.9997; ci.ce = ceN; if (c.gt2 > 0.001) { var ySat = ceN * Math.tanh(v / (0.35 * ceN + 1e-9)); v += c.gt2 * (ySat - v); }
-          v = bqs(vc[1], ci.vz, 2, bqs(vc[0], ci.vz, 0, v));
+          v = bqs(vc[3], ci.vz, 6, bqs(vc[2], ci.vz, 4, bqs(vc[1], ci.vz, 2, bqs(vc[0], ci.vz, 0, v))));
           var dcy = v - ci.dcx + 0.9995 * ci.dcy; ci.dcx = v; ci.dcy = dcy; v = dcy;
           ci.lc = (1 - lcCoef) * v + lcCoef * ci.lc; v = v - c.lcm * ci.lc;
           v = bqs(tc2[1], ci.tz, 2, bqs(tc2[0], ci.tz, 0, v));
