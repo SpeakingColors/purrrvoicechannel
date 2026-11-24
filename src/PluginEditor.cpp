@@ -711,8 +711,14 @@ struct PurrVoiceEditor::Content : public Component
             "Free and open source, AGPL-3.0-or-later. Collects nothing, makes no network calls; the buttons below only open a page in your browser when you click them.\n\n"
             "Your presets live in:\n" + PurrVoiceProcessor::presetDir().getFullPathName() + "\n\n"
             "A software tube channel strip in the spirit of a classic voice channel. No brand names, no affiliation; tube names are our own cat names.")
-            .withButton ("Support on Ko-fi").withButton ("Open on GitHub").withButton ("Close").withAssociatedComponent (this),
-            [] (int r) { if (r == 1) URL ("https://ko-fi.com/studio87").launchInDefaultBrowser(); else if (r == 2) URL ("https://github.com/SpeakingColors/purrrvoicechannel").launchInDefaultBrowser(); });
+            .withButton ("Support on Ko-fi").withButton ("Open Studio 87 Gear Updater").withButton ("Open on GitHub").withButton ("Close").withAssociatedComponent (this),
+            [] (int r)
+            {
+                const URL gh ("https://github.com/SpeakingColors/purrrvoicechannel");
+                if (r == 1) URL ("https://ko-fi.com/studio87").launchInDefaultBrowser();
+                else if (r == 2) { if (! URL ("studio87://open?product=purrrvoicechannel").launchInDefaultBrowser()) gh.launchInDefaultBrowser(); }   // no network call; falls back to GitHub
+                else if (r == 3) gh.launchInDefaultBrowser();
+            });
     }
 
     PurrVoiceEditor& owner; PurrVoiceProcessor& proc; LaF laf; Image face; Display display;
