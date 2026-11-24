@@ -80,6 +80,13 @@ void PurrVoiceProcessor::setStateInformation (const void* data, int size)
             presetName = t.getProperty ("preset", presetName).toString(); notes = t.getProperty ("notes", "").toString();
             editorWidth = (int) t.getProperty ("editorWidth", 0); bubbles = (bool) t.getProperty ("bubbles", true);
             apvts.replaceState (t); jumpVoltage = true;
+            // set every parameter explicitly: replaceState skips values it thinks are unchanged, which can leave a switch at a raw half value
+            for (int i = 0; i < t.getNumChildren(); ++i)
+            {
+                const auto c = t.getChild (i);
+                if (auto* p = apvts.getParameter (c.getProperty ("id").toString()))
+                    if (c.hasProperty ("value")) p->setValueNotifyingHost (p->convertTo0to1 ((float) (double) c.getProperty ("value")));
+            }
         }
 }
 
