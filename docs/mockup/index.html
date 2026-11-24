@@ -321,7 +321,7 @@ body { user-select:none; -webkit-user-select:none; } textarea, input, select { u
         
       </div>
     </section>
-    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9.2 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
+    <footer class="foot"><span><b>Studio 87</b> &middot; Purrr Voice Channel v0.9.3 design mockup</span><span id="sizeT" data-tip="Window size. Drag any edge or corner of the plugin to resize it; the shape stays the same. Double-click here for 100 %.">Window 100 %</span><span></span></footer>
   </div>
   <div class="cheek r"></div>
 </div>
@@ -475,7 +475,7 @@ document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !m
 function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 function aboutCard(name, extra) {
   openCard('<h2>About &amp; Support</h2><p><b>' + name + '</b> by Studio 87, AGPL-3.0-or-later. This page is a design mockup that plays test signals in your browser.</p>' + (extra || "") +
-    '<h3>Support</h3><p>If it helps your music, a coffee on Ko-fi keeps new plugins coming.</p><div class="row"><a class="btn" href="https://ko-fi.com/studio87" target="_blank" rel="noopener">&#9749; Support Studio 87 on Ko-fi</a><a class="btn" href="studio87://open?product=purrrvoicechannel" data-tip="Opens Studio 87 Gear Updater to check this plugin for updates. Nothing is sent anywhere. If it is not installed, the GitHub page opens instead.">Open Studio 87 Gear Updater</a><a class="btn" href="https://github.com/SpeakingColors/purrrvoicechannel" target="_blank" rel="noopener" data-tip="Opens this plugin&#39;s home page on GitHub in your browser. Nothing is sent by the plugin.">Open on GitHub</a><a class="btn" href="https://github.com/SpeakingColors" target="_blank" rel="noopener">GitHub</a><button data-close>Close</button></div>');
+    '<h3>Support</h3><p>If it helps your music, a coffee on Ko-fi keeps new plugins coming.</p><div class="row"><a class="btn" href="https://ko-fi.com/studio87" target="_blank" rel="noopener">&#9749; Support Studio 87 on Ko-fi</a><a class="btn" href="https://github.com/SpeakingColors" target="_blank" rel="noopener">GitHub</a><button data-close>Close</button></div>');
 }
 function settingsCard() {
   openCard('<h2>Settings</h2><div class="set"><span>Info bubbles after 1 s of hovering</span><button id="sBub" aria-pressed="' + SET.bubbles + '">' + (SET.bubbles ? "On" : "Off") + '</button></div>' +
@@ -730,7 +730,7 @@ function VoiceDSP(sr) {
   var TPC = (function () { var o = [], q, k; for (q = 1; q <= 3; q++) { var t = q / 4, c = [], sm = 0; for (k = -3; k <= 4; k++) { var x = k - t, sn = Math.abs(x) < 1e-9 ? 1 : Math.sin(PI * x) / (PI * x), w = 0.5 + 0.5 * Math.cos(PI * x / 4.5); c.push(sn * w); sm += sn * w; } for (k = 0; k < 8; k++) c[k] /= sm; o.push(c); } return o; })(), ldbLast = -120, DSMAX = 20, denv = -70, denvA = 0, denvR = 0, sgK = 1 - Math.exp(-1 / (0.05 * sr)), lbP = 0, gg = new Float64Array(LMASK + 1).fill(1), rr = new Float64Array(LMASK + 1).fill(1), sumR = LN, Rprev = 1, lgrMax = 0;
   function autoMk() { if (c.ratio < 1.0005) return 0; var sl = 1 - 1 / c.ratio, W = c.knee, o = 6, half = W / 2; return o > half ? sl * o : (W > 0.01 ? sl * (o + half) * (o + half) / (2 * W) : 0); }
   function step() {
-    buildTick(); var tg = T.tvolt === "high" ? 1 : 0; tubeK += (tg - tubeK) * kA;
+    buildTick(); var tg = T.tvolt === "high" ? 1 : 0; tubeK += (tg - tubeK) * kA; kEff = tubeK;
     var tz = toneOf(T.imp).z, sp = TSP[T.tube] || TSP.ax7, vr = T.tvar <= 0 ? 0.2 : 0.2 + 4.8 * Math.pow(T.tvar / 100, 1.2), ex = vr, colk = T.tcol / 100, vm = Math.max(0, Math.min(3, (T.tvoice === undefined ? 100 : T.tvoice) / 100));
     var nzL = Math.min(-50, -90 + 5 * (5 - sp.nz) * (1 + T.tvar / 100));
     var tgt = { gdb: 0.6 * T.gpos - (T.pad ? 20 : 0) + 1.5 * tubeK + Math.max(-8, Math.min(8, sp.gt * ex * vm)), odb: T.out <= -59.5 ? -120 : T.out, imz: tz, lg: T.lg, lf: T.lf, lq: Math.log(T.lq), m1g: T.m1g, m1f: T.m1f, m1q: Math.log(T.m1q), m2g: T.m2g, m2f: T.m2f, m2q: Math.log(T.m2q), hg: T.hg, hf: T.hf, hq: Math.log(T.hq), thr: T.thr, ratio: T.ratio,
@@ -768,6 +768,7 @@ function VoiceDSP(sr) {
   function bqs(q, z, o, v) { var y = q[0] * v + z[o]; z[o] = q[1] * v - q[3] * y + z[o + 1]; z[o + 1] = q[2] * v - q[4] * y; return y; }
   function eq(ci, v) { for (var b = 0; b < 4; b++) v = bqs(eqc[b], ci.z, b * 2, v); return v; }
   function smax(a, b) { return 0.5 * (a + b + Math.sqrt((a - b) * (a - b) + 1e-4)); }
+  var emA = 1 - Math.pow(1 - 0.0015, 48000 / sr), ceR = Math.pow(0.9997, 48000 / sr), dcR = Math.pow(0.9995, 48000 / sr);
   var smMix = 1, smDsw = 0, smDsl = 0, x = [0, 0], x0 = [0, 0], yy = [0, 0], oy = [0, 0];
   function process(iL, iR, oL, oR, n) {
     var pkIL = 0, pkIR = 0, pkOL = 0, pkOR = 0, rms = 0, grMax = 0, egMax = 0, dgMax = 0, s, e, ci, ii = [iL, iR], oo = [oL, oR];
@@ -787,9 +788,9 @@ function VoiceDSP(sr) {
           push(ci.u1, 47, v); var ua = 2 * dot(ci.u1, H1); push(ci.u1, 47, 0); var ub = 2 * dot(ci.u1, H1), r;
           for (r = 0; r < 2; r++) { var w = r ? ub : ua; push(ci.u2, 17, w); var p0 = 2 * dot(ci.u2, H2); push(ci.u2, 17, 0); var p1 = 2 * dot(ci.u2, H2);
             push(ci.d2, 17, tubeStage(ci, p0)); var back = dot(ci.d2, H2); push(ci.d2, 17, tubeStage(ci, p1)); if (r) ub = back; else ua = back; }
-          push(ci.d1, 47, ua); v = dot(ci.d1, H1); push(ci.d1, 47, ub); var tmE = c.cc * v * v / (Math.abs(v) + 0.02); ci.em = (ci.em || 0); ci.em += (tmE - ci.em) * 0.0015; v += tmE - ci.em; var avS = Math.abs(v), ceN = ci.ce || 0; ceN = avS > ceN ? avS : ceN * 0.9997; ci.ce = ceN; if (c.gt2 > 0.001) { var ySat = ceN * Math.tanh(v / (0.35 * ceN + 1e-9)); v += c.gt2 * (ySat - v); }
+          push(ci.d1, 47, ua); v = dot(ci.d1, H1); push(ci.d1, 47, ub); var tmE = c.cc * v * v / (Math.abs(v) + 0.02); ci.em = (ci.em || 0); ci.em += (tmE - ci.em) * emA; v += tmE - ci.em; var avS = Math.abs(v), ceN = ci.ce || 0; ceN = avS > ceN ? avS : ceN * ceR; ci.ce = ceN; if (c.gt2 > 0.001) { var ySat = ceN * Math.tanh(v / (0.35 * ceN + 1e-9)); v += c.gt2 * (ySat - v); }
           v = bqs(vc[3], ci.vz, 6, bqs(vc[2], ci.vz, 4, bqs(vc[1], ci.vz, 2, bqs(vc[0], ci.vz, 0, v))));
-          var dcy = v - ci.dcx + 0.9995 * ci.dcy; ci.dcx = v; ci.dcy = dcy; v = dcy;
+          var dcy = v - ci.dcx + dcR * ci.dcy; ci.dcx = v; ci.dcy = dcy; v = dcy;
           ci.lc = (1 - lcCoef) * v + lcCoef * ci.lc; v = v - c.lcm * ci.lc;
           v = bqs(tc2[1], ci.tz, 2, bqs(tc2[0], ci.tz, 0, v));
           x[k] = v * c.sgn;

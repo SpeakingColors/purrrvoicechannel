@@ -45,6 +45,9 @@ story = [Paragraph("Purrr Voice Channel", H1), Paragraph("Manual . Studio 87 . f
 for k in ("Intro", "Status"):
     story.append(Paragraph(k if k != "Intro" else "What it is", H2))
     for p in paras(k): story += [Paragraph(esc(p), B), Spacer(1, 4)]
+if bullets("Install"):
+    story.append(Paragraph("Install and remove", H2))
+    for t in bullets("Install"): story.append(Paragraph("&bull; " + esc(t), B))
 story.append(Paragraph("Quick guide (from the Guide button)", H2))
 for line in T["dialogs"]["Guide"].splitlines()[1:]:
     line = line.strip()
